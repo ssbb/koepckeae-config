@@ -10,41 +10,22 @@ config SPI
 	default y
 
 config ZMK_DISPLAY
-	select LVGL_USE_CONT
+	select LV_USE_CONT
   select LV_FONT_MONTSERRAT_26
 
-# choice ZMK_DISPLAY_STATUS_SCREEN
-# 	default ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
+choice ZMK_DISPLAY_STATUS_SCREEN
+	default ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
 
-# endchoice
+endchoice
 
-# config ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
-#   select LV_USE_LABEL
+config ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
+  select LV_USE_LABEL
 
-# 	imply ZMK_WIDGET_BATTERY_STATUS
-# 	imply ZMK_WIDGET_OUTPUT_STATUS
-# 	imply ZMK_WIDGET_LAYER_STATUS
+	imply ZMK_WIDGET_BATTERY_STATUS
+	imply ZMK_WIDGET_OUTPUT_STATUS
+	imply ZMK_WIDGET_LAYER_STATUS
 
 if ZMK_DISPLAY
-
-menuconfig KOEPCKEAE_BONGO_CAT
-    bool "Show WPM bongo cat"
-    select ZMK_WPM
-    select LV_USE_IMG
-    select LV_USE_LABEL
-    select LV_USE_ANIMATION
-
-if KOEPCKEAE_BONGO_CAT
-
-config KOEPCKEAE_BONGO_CAT_IDLE_LIMIT
-    int "Upper limit for WPM for showing idle animation"
-    default 30
-
-config KOEPCKEAE_BONGO_CAT_SLOW_LIMIT
-    int "Upper limit for WPM for showing slow typing image"
-    default 60
-
-endif # KOEPCKEAE_BONGO_CAT
 
 config SYSTEM_WORKQUEUE_STACK_SIZE
     default 2048
